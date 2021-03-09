@@ -1,0 +1,22 @@
+name: deploy to EC2
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fresh clone & repo install
+        uses: appleboy/ssh-action@master
+        with:
+          host: 13.211.200.16
+          username: ubuntu
+          key: ${{ secrets.GH_ACTIONS }}
+          port: 22
+          script: |
+            rm -rf docker-deploy
+            git clone https://github.com/petelah/docker-deploy.git
+            cd docker-deploy
+            chmod u+x run_docker.sh
+            sudo ./run_docker.sh

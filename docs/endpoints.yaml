@@ -1,0 +1,48 @@
+openapi: '3.0.2'
+info:
+  title: Cookie Cutter
+  version: 0.1a
+
+servers:
+  - url: http://127.0.0.1:5000
+    variables:
+      username:
+        default: Test0
+        description: Test username
+      email:
+        default: test0@test.com
+        description: Test user email
+      password:
+        default: 123456
+        description: Test user password
+
+
+paths:
+  /api/auth/register:
+    post:
+      tags:
+        - "User Authentication"
+      summary: "Register Account"
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Account Already
+
+  /api/auth/login:
+    post:
+      description: User login. Takes in a post request with username/email and password
+      tags:
+        - "User Authentication"
+      summary: "Account login"
+      responses:
+        '200':
+          description: OK, JWT login token issued
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: No acccount found
+        '401':
+          description: Authentication error

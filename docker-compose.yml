@@ -1,0 +1,19 @@
+version: '3'
+services:
+  test-app:
+    restart: always
+    build: .
+    command: gunicorn -w 4 --bind 0.0.0.0:5000 app:app
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"
+#  nginx:
+#    restart: always
+#    build: ./nginx
+#    links:
+#      - "test-app"
+#    expose:
+#      - "80"
+#    ports:
+#      - "80:80"
