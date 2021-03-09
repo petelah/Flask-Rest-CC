@@ -234,4 +234,5 @@ dmypy.json
 .pyre/
 
 README2.md
+.aws
 
